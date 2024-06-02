@@ -67,7 +67,7 @@ class Newsdata extends State<Newsapp> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: AppColors.beige.withOpacity(0.5),
+      backgroundColor: Colors.white70,
       appBar: AppBar(
         leading: Container(
           margin: EdgeInsets.all(screenWidth * 0.03),
@@ -143,7 +143,7 @@ class Newsdata extends State<Newsapp> {
               final author = newsdata[index]["authorName"];
               final source = newsdata[index]["sourceName"];
               final imageUrl = newsdata[index]["imageUrl"];
-
+              final date = newsdata[index]["date"];
               return FlipCard(
                 fill: Fill.fillBack,
                 direction: FlipDirection.HORIZONTAL,
@@ -172,7 +172,9 @@ class Newsdata extends State<Newsapp> {
                               begin: Alignment.bottomCenter,
                               end: Alignment.topCenter,
                               colors: [
-                                Colors.black.withOpacity(0.9),
+                                Colors.black.withOpacity(0.8),
+                                Colors.black.withOpacity(0.5),
+                                Colors.white.withOpacity(0.1),
                                 Colors.transparent,
                               ],
                             ),
@@ -191,11 +193,15 @@ class Newsdata extends State<Newsapp> {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.white60,
+                              color: Colors.white.withOpacity(0.5),
                               shape: BoxShape.circle,
-                              border:
-                              Border.all(width: 1.0, color: Colors.black),
-                            ),
+                              boxShadow:  [
+                                BoxShadow(
+                                  color: AppColors.skyBlue.withOpacity(0.4),
+                                  offset: Offset(2,0)
+                                )
+                              ]
+                              ),
                             child: IconButton(
                               icon: Icon(
                                 isLikedList[index]
@@ -224,28 +230,37 @@ class Newsdata extends State<Newsapp> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    "•",
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w100,
-                                        color: Colors.white.withOpacity(0.5)),
-                                  ),
-                                  const SizedBox(
-                                    width: 3.0,
-                                  ),
-                                  Text(
-                                    source,
-                                    style: const TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white30,
+                              Container(
+                                padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 16.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.8),
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Text(
+                                      "•",
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black),
                                     ),
-                                  ),
-                                ],
+                                    const SizedBox(
+                                      width: 3.0,
+                                    ),
+                                    Text(
+                                      source,
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
+                              const SizedBox(height: 8,),
                               Text(
                                 title,
                                 style: const TextStyle(
