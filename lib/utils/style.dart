@@ -1,4 +1,4 @@
-import 'package:cardnews/colors.dart';
+import 'package:cardnews/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppStyle {

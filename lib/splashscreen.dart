@@ -1,16 +1,18 @@
-import 'package:cardnews/colors.dart';
+import 'package:cardnews/screens/home_screen/home_screen.dart';
+import 'package:cardnews/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen>
-    with TickerProviderStateMixin { // Change to TickerProviderStateMixin
-
+    with TickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -18,9 +20,19 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 2300),
     );
     _controller.forward();
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        // Navigation logic here, e.g., push to NewsApp screen
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const Newsapp(),
+          ),
+        );
+      }
+    });
   }
 
   @override
@@ -28,6 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
     _controller.dispose();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
